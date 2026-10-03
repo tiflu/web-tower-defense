@@ -16,7 +16,7 @@ grid.replaceGridItem(tower);
 // }, 500)
 //
 //
-// new Enemy("texture.png", 50);
+new Enemy("texture.png", 50);
 
 // heatMap();
 
