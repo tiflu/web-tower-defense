@@ -1,12 +1,30 @@
-const grid = new Grid(20, document.getElementById("gameWindow"));
+const grid = new Grid(5, document.getElementById("grid"));
 
 const pathCoords = [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [3, 2], [3, 3], [3, 4], [4, 4]];
 
-// grid.updatePath(pathCoords);
+grid.updatePath(pathCoords);
 
 // grid.randomPathHelper();
 
-grid.createPathWithUI();
+// grid.createPathWithUI();
+
+// setInterval(() => {
+//     new Enemy("texture.png", 1, 1, Math.random()*5);
+// }, 100)
+//
+//
+new Enemy("texture.png", 1, 1, 1);
+//
+// setInterval(() => {
+//     for (const path of grid.path) {
+//         if (path.enemies.length > 0) {
+//             const a = path.enemies.length;
+//             path.DOMElement.style.backgroundColor = `rgb(${a*20}, ${a*10}, ${a*10}`
+//         } else {
+//             path.DOMElement.style.backgroundColor = "";
+//         }
+//     }
+// }, 10)
 
 // grid.walkPath();
 

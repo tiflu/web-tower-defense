@@ -60,8 +60,6 @@ class Grid {
 
         makeAdjacentSelectable(this, this.items[0][0])
 
-
-
         function makeAdjacentSelectable(gridObject, item) {
             // todo stop directly adjacent path
             const selectors = [];
@@ -77,7 +75,7 @@ class Grid {
             }
 
             if (selectors.length === 0) {
-                // stuck
+                // todo stuck
             }
 
             for (const selectItem of selectors) {
@@ -118,10 +116,6 @@ class Grid {
                 download(JSON.stringify(saveAs), "tower-defense-path", "application/json");
             }
         }
-
-
-
-
     }
 
     randomPathHelper() {
@@ -288,13 +282,13 @@ class GridItem {
 class Path extends GridItem {
     constructor(x, y) {
         super(x, y);
+        this.enemies = [];
     }
 
     createDOMElement() {
         const element = super.createDOMElement();
         element.classList.add("path");
         element.addEventListener("click", () => {
-            element.style.backgroundColor = "blue";
         });
 
         return element;
@@ -311,10 +305,68 @@ class Empty extends GridItem {
         element.classList.add("empty");
 
         element.addEventListener("click", () => {
-            element.style.backgroundColor = "red";
-        })
+        });
 
         return element;
 
+    }
+}
+
+class Tower extends GridItem {
+    constructor(x, y) {
+        super(x, y);
+    }
+
+    createDOMElement() {
+        const element = super.createDOMElement();
+        element.classList.add("tower");
+        element.addEventListener("click", () => {
+
+        });
+
+        return element;
+    }
+}
+
+class PeaShooter extends Tower {
+    constructor (x, y) {
+        super(x, y);
+    }
+}
+
+
+class Enemy {
+    constructor(texture, health=1, defense=0, speed=1) {
+        this.health = health;
+        this.defense = defense;
+        this.speed = speed;
+        this.texture = texture;
+        this.DOMElement = this.createDOMElement();
+        this.pathIndex = 0;
+        this.startMoving();
+    }
+
+    createDOMElement() {
+        const element = document.createElement("div");
+        const mainTexture = document.createElement("img");
+        mainTexture.src = this.texture;
+        element.classList.add("enemy");
+        element.append(mainTexture);
+        return element;
+    }
+
+    startMoving() {
+        document.getElementById("enemies").append(this.DOMElement);
+        setInterval(() => this.move(), 1000/this.speed);
+    }
+
+    move() {
+        const oldPath = grid.path[this.pathIndex];
+        oldPath.enemies.splice(oldPath.enemies.indexOf(this), 1);
+        const newPath = grid.path[++this.pathIndex]
+        newPath.enemies.push(this);
+        const pathBounds = newPath.DOMElement.getBoundingClientRect();
+        this.DOMElement.style.top = pathBounds.top + "px";
+        this.DOMElement.style.left = pathBounds.left + "px";
     }
 }
