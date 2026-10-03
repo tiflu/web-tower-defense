@@ -1,0 +1,32 @@
+body {
+    /*height: 100vw;*/
+    background-color: black;
+    aspect-ratio: 1;
+    margin: 0;
+}
+
+#gameWindow {
+    height: inherit;
+    width: inherit;
+    aspect-ratio: inherit;
+}
+
+.gridParent {
+    display: grid;
+}
+
+.gridItem {
+    outline: 2px solid black;
+}
+
+.gridItem.empty {
+    background-color: gray;
+}
+
+.gridItem.path {
+    background-color: rosybrown;
+}
+
+.gridItem:hover {
+    opacity: 0.8;
+}
