@@ -53,14 +53,16 @@ class Grid {
     }
 
     randomPathHelper() {
-        console.log("hi!")
-        setTimeout(() => {
-            console.log("here we go!");
-            this.updatePath(this.createRandomPath());
-        }, 2000)
+        this.updatePath(this.createRandomPath());
     }
 
     createRandomPath() {
+
+        // todo VERY UNOPTIMIZED
+        // todo crashes sometimes
+        // todo can still have touching paths
+        //    fix this by checking directly adjacent squares for the other one right after placement?
+
         const start = [0, 0]
         const end = [this.size-1, this.size-1];
         const startArray = [start];
@@ -99,7 +101,8 @@ class Grid {
 
         // Collider is IN the collided array, colliding array tried to run into it
         function onCollision(collider, collidingArray, collidedArray, collidingIsStart) {
-            const cutArray = collidedArray.slice(0, collidedArray.indexOf(collider));
+            const cutArray = collidedArray.slice(0, getSubArrayIndex(collidedArray, collider) + 1);
+            console.log(cutArray);
             if (collidingIsStart) {
                 return collidingArray.concat(cutArray);
             } else {
@@ -159,14 +162,20 @@ class Grid {
         }
 
         function arrayContainsArray(container, subArray) {
+            return getSubArrayIndex(container, subArray) >= 0;
+        }
+
+        function getSubArrayIndex(container, subArray) {
             for (const array of container) {
                 if (array.length !== subArray.length) continue;
                 for (let i = 0; i < array.length; i++) {
                     if (array[i] !== subArray[i]) break;
-                    if (i === array.length-1) return true;
+                    if (i === array.length-1) {
+                        return container.indexOf(array);
+                    }
                 }
             }
-            return false;
+            return -1;
         }
     }
 
