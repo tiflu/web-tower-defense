@@ -52,6 +52,78 @@ class Grid {
         this.replaceGridItems(this.path);
     }
 
+    createPathWithUI() {
+        const path = [this.items[0][0]];
+        const endObject = this.items[this.size-1][this.size-1];
+        this.items[0][0].DOMElement.style.backgroundColor = "red";
+        endObject.DOMElement.style.backgroundColor = "blue";
+
+        makeAdjacentSelectable(this, this.items[0][0])
+
+
+
+        function makeAdjacentSelectable(gridObject, item) {
+            // todo stop directly adjacent path
+            const selectors = [];
+
+            for (let i = -1; i < 2; i++) {
+                for (let j = -1; j < 2; j++) {
+                    if (Math.abs(i+j) !== 1) continue;
+                    if (item.x+i >= gridObject.size || item.x+i < 0) continue;
+                    if (item.y+j >= gridObject.size || item.y+j < 0) continue;
+                    if (path.includes(gridObject.items[item.x+i][item.y+j])) continue;
+                    selectors.push(gridObject.items[item.x+i][item.y+j]);
+                }
+            }
+
+            if (selectors.length === 0) {
+                // stuck
+            }
+
+            for (const selectItem of selectors) {
+                selectItem.DOMElement.style.backgroundColor = "pink";
+                selectItem.DOMElement.style.cursor = "pointer";
+                selectItem.DOMElement.addEventListener("click", select);
+                selectItem.DOMElement.parentObject = selectItem;
+            }
+
+            function select(event) {
+                const itemObject = event.target.parentObject;
+                path.push(itemObject);
+                for (const selectItem of selectors) {
+                    selectItem.DOMElement.style.backgroundColor = "";
+                    selectItem.DOMElement.style.cursor = "";
+                    selectItem.DOMElement.removeEventListener("click", select);
+                    selectItem.DOMElement.parentObject = undefined;
+                }
+                if (itemObject === endObject) {
+                    console.log(path);
+                    savePath(gridObject.size)
+                    return;
+                }
+                event.target.style.backgroundColor = "lightblue";
+                makeAdjacentSelectable(gridObject, itemObject);
+            }
+
+            function savePath(size) {
+                const savePath = [];
+                for (const element of path) {
+                    console.log("!");
+                    savePath.push([element.x, element.y]);
+                }
+                const saveAs = {
+                    size: size,
+                    path: savePath
+                }
+                download(JSON.stringify(saveAs), "tower-defense-path", "application/json");
+            }
+        }
+
+
+
+
+    }
+
     randomPathHelper() {
         this.updatePath(this.createRandomPath());
     }
@@ -141,16 +213,22 @@ class Grid {
             // to the object on child functions.
             function check(dX, dY, x, y, array, size) {
                 // if moving left/right
+                // some logic issues, should be rewritten
                 if (dY === 0) {
                     if (x + dX < 0 || x + dX >= size) return false;
                     for (let i = -1; i < 2; i++) {
-                        // console.log(array.slice(), [x + dX, y+i]);
+                        if (arrayContainsArray(array, [x + dX, y])) return false;
+                    }
+                    for (let i = -1; i < 2; i++) {
                         if (arrayContainsArray(array, [x + dX, y+i])) return false;
                     }
                     return true;
                 // if moving up/down
                 } else if (dX === 0) {
                     if (y + dY < 0 || y + dY >= size) return false;
+                    for (let i = -1; i < 2; i++) {
+                        if (arrayContainsArray(array, [y + dY, x])) return false;
+                    }
                     for (let i = -1; i < 2; i++) {
                         if (arrayContainsArray(array, [y + dY, x+i])) return false;
                     }

@@ -1,10 +1,12 @@
-const grid = new Grid(5, document.getElementById("gameWindow"));
+const grid = new Grid(20, document.getElementById("gameWindow"));
 
 const pathCoords = [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [3, 2], [3, 3], [3, 4], [4, 4]];
 
 // grid.updatePath(pathCoords);
 
-grid.randomPathHelper();
+// grid.randomPathHelper();
+
+grid.createPathWithUI();
 
 // grid.walkPath();
 
@@ -50,8 +52,6 @@ function makeElementIntoCSSGrid(element, size=40) {
         object.style.backgroundColor = `hsl(${hue}, ${saturation}, ${lightness})`;
         element.append(object);
     }
-
-
 }
 
 
@@ -64,6 +64,16 @@ async function wait(ms) {
 function randInt(max=100) {
     return Math.floor(Math.random() * max);
 }
+
+
+function download(content, fileName, contentType) {
+    const a = document.createElement("a");
+    const file = new Blob([content], {type: contentType});
+    a.href = URL.createObjectURL(file);
+    a.download = fileName;
+    a.click();
+}
+
 // const container = [[1, 1], [0, 1], [2, 1]]
 // const array = [0, 1]
 // const result = arrayContainsArray(container, array)
