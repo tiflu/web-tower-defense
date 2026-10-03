@@ -53,9 +53,10 @@ class Tower extends GridItem {
     getPathsInRange() {
         const itemsInRange = [];
 
-        for (let i = this.x - this.radius; i < this.x + this.radius; i++) {
-            for (let j = this.y - this.radius; j < this.y + this.radius; j++) {
+        for (let i = this.x - this.radius; i <= this.x + this.radius; i++) {
+            for (let j = this.y - this.radius; j <= this.y + this.radius; j++) {
                 if (grid.coordinatesInBounds(i, j)) {
+                    // grid.items[i][j].DOMElement.style.backgroundColor = "white";
                     itemsInRange.push(grid.items[i][j]);
                 }
             }

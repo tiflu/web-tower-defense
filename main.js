@@ -1,6 +1,7 @@
-const grid = new Grid(5, document.getElementById("grid"));
+const grid = new Grid(20, document.getElementById("grid"));
 
-const pathCoords = [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [3, 2], [3, 3], [3, 4], [4, 4]];
+// const pathCoords = [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [3, 2], [3, 3], [3, 4], [4, 4]];
+const pathCoords = [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[5,1],[5,2],[5,3],[5,4],[5,5],[5,6],[5,7],[6,7],[7,7],[8,7],[9,7],[10,7],[11,7],[12,7],[13,7],[13,8],[13,9],[13,10],[13,11],[13,12],[13,13],[13,14],[14,14],[15,14],[16,14],[17,14],[18,14],[19,14],[19,15],[19,16],[19,17],[19,18],[19,19]]
 
 grid.updatePath(pathCoords);
 
@@ -8,24 +9,24 @@ grid.updatePath(pathCoords);
 
 // grid.createPathWithUI();
 
-const tower = new PeaShooter(2, 3);
+const tower = new PeaShooter(3, 2);
 grid.replaceGridItem(tower);
 
-// setInterval(() => {
-//     new Enemy("texture.png", 1, 1, Math.random()*5);
-// }, 500)
+setInterval(() => {
+    new Enemy("texture.png", 1, 1, Math.random()*5);
+}, 500)
 //
 //
 new Enemy("texture.png", 50);
 
-// heatMap();
+heatMap();
 
 function heatMap() {
     setInterval(() => {
         for (const path of grid.path) {
             if (path.enemies.length > 0) {
                 const a = path.enemies.length;
-                path.DOMElement.style.backgroundColor = `rgb(${a*20}, ${a*10}, ${a*10}`
+                path.DOMElement.style.backgroundColor = `rgb(${a*20}, ${a*10}, ${a*10})`
             } else {
                 path.DOMElement.style.backgroundColor = "";
             }
