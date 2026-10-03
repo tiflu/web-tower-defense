@@ -8,23 +8,30 @@ grid.updatePath(pathCoords);
 
 // grid.createPathWithUI();
 
+const tower = new PeaShooter(2, 3);
+grid.replaceGridItem(tower);
+
 // setInterval(() => {
 //     new Enemy("texture.png", 1, 1, Math.random()*5);
-// }, 100)
+// }, 500)
 //
 //
-new Enemy("texture.png", 1, 1, 1);
-//
-// setInterval(() => {
-//     for (const path of grid.path) {
-//         if (path.enemies.length > 0) {
-//             const a = path.enemies.length;
-//             path.DOMElement.style.backgroundColor = `rgb(${a*20}, ${a*10}, ${a*10}`
-//         } else {
-//             path.DOMElement.style.backgroundColor = "";
-//         }
-//     }
-// }, 10)
+// new Enemy("texture.png", 50);
+
+// heatMap();
+
+function heatMap() {
+    setInterval(() => {
+        for (const path of grid.path) {
+            if (path.enemies.length > 0) {
+                const a = path.enemies.length;
+                path.DOMElement.style.backgroundColor = `rgb(${a*20}, ${a*10}, ${a*10}`
+            } else {
+                path.DOMElement.style.backgroundColor = "";
+            }
+        }
+    }, 10)
+}
 
 // grid.walkPath();
 

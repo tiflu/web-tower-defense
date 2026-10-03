@@ -27,6 +27,7 @@ class Grid {
     }
 
     replaceGridItem(item) {
+        this.items[item.x][item.y] = item;
         this.DOMElement.children[item.x * this.size + item.y].replaceWith(
             item.DOMElement);
     }
@@ -267,7 +268,7 @@ class Grid {
     }
 
     coordinateInBounds(num) {
-        return num < 0 || num > this.size;
+        return num >= 0 && num < this.size;
     }
 
     coordinatesInBounds(x, y) {
@@ -373,19 +374,17 @@ class Tower extends GridItem {
     }
 
     shoot() {
-
-
         // todo vfx
         this.targetedEnemy.health -= this.damage;
     }
 
     getPathsInRange() {
-        const unsortedPaths = [];
+        const itemsInRange = [];
 
         for (let i = this.x - this.radius; i < this.x + this.radius; i++) {
             for (let j = this.y - this.radius; j < this.y + this.radius; j++) {
                 if (grid.coordinatesInBounds(i, j)) {
-                    unsortedPaths.push(grid.items[i][j]);
+                    itemsInRange.push(grid.items[i][j]);
                 }
             }
         }
@@ -393,7 +392,7 @@ class Tower extends GridItem {
         const sortedPaths = [];
 
         for (const path of grid.path) {
-            if (unsortedPaths.includes(path)) {
+            if (itemsInRange.includes(path)) {
                 sortedPaths.push(path);
             }
         }
@@ -403,21 +402,22 @@ class Tower extends GridItem {
 }
 
 class PeaShooter extends Tower {
-    constructor (x, y, range) {
-        super(x, y, range);
+    constructor (x, y) {
+        super(x, y, 2, 1);
     }
 }
 
 
 class Enemy {
-    constructor(texture, health=1, defense=0, speed=1) {
+    constructor(texture, health=10, defense=0, speed=1) {
         this.health = health;
         this.defense = defense;
         this.speed = speed;
         this.texture = texture;
         this.DOMElement = this.createDOMElement();
         this.pathIndex = 0;
-        this.startMoving();
+        document.getElementById("enemies").append(this.DOMElement);
+        this.moveHandler();
     }
 
     createDOMElement() {
@@ -429,12 +429,24 @@ class Enemy {
         return element;
     }
 
-    startMoving() {
-        document.getElementById("enemies").append(this.DOMElement);
-        setInterval(() => this.move(), 1000/this.speed);
+    moveHandler() {
+        setTimeout(() => {
+            this.move()
+            if (this.isValid()) {
+                this.moveHandler();
+            } else {
+                // todo remove references to the object in others
+                this.DOMElement.remove();
+            }
+        }, 1000/this.speed)
+    }
+
+    isValid() {
+        return this.health > 0 && this.pathIndex < grid.path.length - 1
     }
 
     move() {
+        console.log(this.health);
         const oldPath = grid.path[this.pathIndex];
         oldPath.enemies.splice(oldPath.enemies.indexOf(this), 1);
         const newPath = grid.path[++this.pathIndex]
