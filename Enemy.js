@@ -38,12 +38,12 @@ class Enemy {
     }
 
     move() {
-        console.log(this.health);
         const oldPath = grid.path[this.pathIndex];
         oldPath.enemies.splice(oldPath.enemies.indexOf(this), 1);
         const newPath = grid.path[++this.pathIndex]
         newPath.enemies.push(this);
         const pathBounds = newPath.DOMElement.getBoundingClientRect();
+        console.log(pathBounds)
         this.DOMElement.style.top = pathBounds.top + "px";
         this.DOMElement.style.left = pathBounds.left + "px";
     }
