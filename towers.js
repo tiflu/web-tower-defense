@@ -47,7 +47,7 @@ class Tower extends GridItem {
 
     shoot() {
         // todo vfx
-        this.targetedEnemy.health -= this.damage;
+        this.targetedEnemy.takeDamage(this.damage);
     }
 
     getPathsInRange() {

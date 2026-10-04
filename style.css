@@ -1,14 +1,16 @@
 body {
-    /*height: 100vw;*/
+    width: 100vw;
     background-color: black;
-    aspect-ratio: 1;
     margin: 0;
 }
 
-#grid {
-    height: inherit;
-    width: inherit;
-    aspect-ratio: inherit;
+#grid, #enemies {
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+#enemies {
+    position: absolute;
 }
 
 .gridParent {

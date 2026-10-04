@@ -15,6 +15,8 @@ class Enemy {
         const mainTexture = document.createElement("img");
         mainTexture.src = this.texture;
         element.classList.add("enemy");
+        element.style.height = 100 / grid.size + "%";
+        element.style.width = 100 / grid.size + "%";
         element.append(mainTexture);
         return element;
     }
@@ -44,5 +46,10 @@ class Enemy {
         const pathBounds = newPath.DOMElement.getBoundingClientRect();
         this.DOMElement.style.top = pathBounds.top + "px";
         this.DOMElement.style.left = pathBounds.left + "px";
+    }
+
+    takeDamage(amount) {
+        this.health -= amount;
+        return this.health < 0;
     }
 }
