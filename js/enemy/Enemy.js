@@ -1,5 +1,5 @@
 class Enemy {
-    constructor(texture, health=10, defense=0, speed=1, value=10) {
+    constructor(texture, health, defense, speed, value) {
         this.health = health;
         this.defense = defense;
         this.value = value;
