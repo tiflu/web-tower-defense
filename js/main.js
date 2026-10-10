@@ -1,9 +1,17 @@
 const grid = new Grid(20, document.getElementById("grid"));
 const player = new Player();
 
-// window.addEventListener("keydown", () => {
-//     player.earn(100);
-// })
+window.addEventListener("keydown", (event) => {
+    switch (event.key) {
+        case "p": {
+            alert("Paused...");
+            break;
+        }
+        case "g": {
+            player.earn(100);
+        }
+    }
+})
 
 updateInfo();
 
@@ -16,11 +24,15 @@ grid.updatePath(pathCoords);
 
 // grid.createPathWithUI();
 
-setInterval(() => {
-    new Enemy("triangle.png", 1, 1, Math.random()*5);
-}, 500)
-//
-//
+randomEnemies();
+
+function randomEnemies() {
+    const enemies = [new Triangle(), new Square(), new Pentagon(), new Hexagon()]
+    setInterval(() => {
+        const randEnemy = enemies[randInt(enemies.length)];
+        new randEnemy.constructor();
+    }, 500)
+}
 
 function heatMap() {
     setInterval(() => {
@@ -59,10 +71,6 @@ function makeElementIntoGrid(element, size=40) {
     }
 
     element.lastElementChild.style.cursor = "click";
-
-    function randInt(max=100) {
-        return Math.ceil(Math.random() * max);
-    }
 }
 
 function makeElementIntoCSSGrid(element, size=40) {
