@@ -1,7 +1,8 @@
 class Enemy {
-    constructor(texture, health=10, defense=0, speed=1) {
+    constructor(texture, health=10, defense=0, speed=1, value=10) {
         this.health = health;
         this.defense = defense;
+        this.value = value;
         this.speed = speed;
         this.texture = texture;
         this.DOMElement = this.createDOMElement();
@@ -27,8 +28,7 @@ class Enemy {
             if (this.isValid()) {
                 this.moveHandler();
             } else {
-                // todo remove references to the object in others
-                this.DOMElement.remove();
+                this.die();
             }
         }, 1000/this.speed)
     }
@@ -50,5 +50,21 @@ class Enemy {
     takeDamage(amount) {
         this.health -= amount;
         return this.health < 0;
+    }
+
+    die() {
+        player.earn(this.value);
+        // I feel like this could be implemented more performantly
+        // Maybe add an alive field and have a global listener "clean" every once in a while?
+        this.DOMElement.remove();
+        for (const path of grid.path) {
+            for (const enemy of path.enemies) {
+                if (enemy === this) {
+                    path.enemies.splice(path.enemies.indexOf(this), 1);
+                    return;
+                }
+            }
+        }
+        throw new Error("Enemy not found!");
     }
 }
