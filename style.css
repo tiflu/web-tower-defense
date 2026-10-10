@@ -73,3 +73,29 @@ body {
     width: 10vw;
     background-color: grey;
 }
+
+.upgrade {
+    display: flex;
+    gap: 0.2rem;
+    margin: 0 0.5rem;
+    flex-direction: column;
+}
+
+.upgrade .title {
+    display: flex;
+}
+
+.upgrade .money {
+    display: flex;
+    align-items: center;
+}
+
+.upgrade .money img {
+    height: 2rem;
+}
+
+.upgrade .text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
