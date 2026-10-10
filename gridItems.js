@@ -40,6 +40,7 @@ class Empty extends GridItem {
         element.classList.add("empty");
 
         element.addEventListener("click", () => {
+            
         });
 
         return element;

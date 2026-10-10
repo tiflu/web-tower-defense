@@ -11,6 +11,7 @@ grid.updatePath(pathCoords);
 
 const tower = new PeaShooter(3, 2);
 grid.replaceGridItem(tower);
+insertTowerPurchase(tower);
 
 setInterval(() => {
     new Enemy("texture.png", 1, 1, Math.random()*5);

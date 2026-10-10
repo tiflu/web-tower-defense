@@ -1,10 +1,17 @@
 class Tower extends GridItem {
-    constructor(x, y, radius, damage) {
+    constructor(x, y, radius, damage, name, description, texture) {
+        // todo finish ui.js and then also also do the unused constructor fields
         super(x, y);
+        this.name = name;
+        this.description = description;
+        this.texture = texture;
         this.radius = radius;
         this.damage = damage;
         this.targetedEnemy = null;
         this.pathTargets = this.getPathsInRange();
+        const textureImg = document.createElement("img");
+        textureImg.src = this.texture;
+        this.DOMElement.append(textureImg);
         this.start();
     }
 
@@ -76,6 +83,6 @@ class Tower extends GridItem {
 
 class PeaShooter extends Tower {
     constructor (x, y) {
-        super(x, y, 2, 1);
+        super(x, y, 2, 1, "Pea Shooter", "A basic tower", "texture.png");
     }
 }

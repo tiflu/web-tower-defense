@@ -2,7 +2,9 @@ body {
     height: 100vh;
     margin: 0;
     display: flex;
+    background-color: black;
     justify-content: center;
+    gap: 1rem;
 }
 
 #gameArea {
@@ -53,4 +55,21 @@ body {
 
 .gridItem.tower {
     background-color: crimson;
+}
+
+.gridItem.tower img {
+    height: 100%;
+    width: 100%;
+}
+
+#upgradeMenu {
+    height: 100vh;
+    width: 20vw;
+    background-color: grey;
+}
+
+#infoMenu {
+    height: 100vh;
+    width: 10vw;
+    background-color: grey;
 }
