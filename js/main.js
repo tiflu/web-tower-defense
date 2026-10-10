@@ -13,6 +13,9 @@ window.addEventListener("keydown", (event) => {
     }
 })
 
+
+alert("Welcome to the game! Press P to pause. Click on a tile to add a tower. Press OK to start.")
+
 updateInfo();
 
 // const pathCoords = [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [3, 2], [3, 3], [3, 4], [4, 4]];
