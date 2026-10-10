@@ -1,6 +1,7 @@
 class Tower extends GridItem {
     constructor(x, y, radius, damage, name, description, texture, cost) {
         super(x, y);
+        const FILE_PATH = "./texture/tower/"
         this.name = name;
         this.description = description;
         this.texture = texture;
@@ -10,7 +11,7 @@ class Tower extends GridItem {
         this.targetedEnemy = null;
         this.pathTargets = this.getPathsInRange();
         const textureImg = document.createElement("img");
-        textureImg.src = this.texture;
+        textureImg.src = FILE_PATH + this.texture;
         this.DOMElement.append(textureImg);
         this.start();
     }
@@ -78,11 +79,5 @@ class Tower extends GridItem {
         }
 
         return sortedPaths;
-    }
-}
-
-class PeaShooter extends Tower {
-    constructor (x, y) {
-        super(x, y, 2, 1, "Pea Shooter", "A basic tower", "texture.png", 100);
     }
 }

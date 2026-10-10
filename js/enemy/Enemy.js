@@ -12,9 +12,10 @@ class Enemy {
     }
 
     createDOMElement() {
+        const FILE_PATH = "./texture/enemy/"
         const element = document.createElement("div");
         const mainTexture = document.createElement("img");
-        mainTexture.src = this.texture;
+        mainTexture.src = FILE_PATH + this.texture;
         element.classList.add("enemy");
         element.style.height = 100 / grid.size + "%";
         element.style.width = 100 / grid.size + "%";

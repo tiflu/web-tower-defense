@@ -21,11 +21,11 @@ grid.replaceGridItem(tower);
 // insertTowerPurchase(tower);
 
 setInterval(() => {
-    new Enemy("texture.png", 1, 1, Math.random()*5);
+    new Enemy("triangle.png", 1, 1, Math.random()*5);
 }, 500)
 //
 //
-new Enemy("texture.png", 50);
+new Enemy("triangle.png", 50);
 
 heatMap();
 
