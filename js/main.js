@@ -1,5 +1,9 @@
-const grid = new Grid(20, document.getElementById("grid"));
-const player = new Player();
+const game = makeGame();
+const dummyEnemies = [new Triangle(), new Square(), new Pentagon(), new Hexagon()];
+game.setRounds(dummyRounds());
+game.start();
+
+
 
 window.addEventListener("keydown", (event) => {
     switch (event.key) {
@@ -8,7 +12,7 @@ window.addEventListener("keydown", (event) => {
             break;
         }
         case "g": {
-            player.earn(100);
+            game.player.earn(100);
         }
     }
 })
@@ -21,7 +25,7 @@ updateInfo();
 // const pathCoords = [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [3, 2], [3, 3], [3, 4], [4, 4]];
 const pathCoords = [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[5,1],[5,2],[5,3],[5,4],[5,5],[5,6],[5,7],[6,7],[7,7],[8,7],[9,7],[10,7],[11,7],[12,7],[13,7],[13,8],[13,9],[13,10],[13,11],[13,12],[13,13],[13,14],[14,14],[15,14],[16,14],[17,14],[18,14],[19,14],[19,15],[19,16],[19,17],[19,18],[19,19]]
 
-grid.updatePath(pathCoords);
+game.grid.updatePath(pathCoords);
 
 // grid.randomPathHelper();
 
@@ -29,17 +33,30 @@ grid.updatePath(pathCoords);
 
 randomEnemies();
 
+function makeGame() {
+    const grid = new Grid(20, document.getElementById("grid"));
+    const player = new Player();
+    return new Game(grid, player);
+}
+
+function dummyRounds() {
+    const rounds = [];
+    for (let i = 0; i < 10; i++) {
+        rounds.push(new Round());
+    }
+    return rounds;
+}
+
 function randomEnemies() {
-    const enemies = [new Triangle(), new Square(), new Pentagon(), new Hexagon()]
     setInterval(() => {
-        const randEnemy = enemies[randInt(enemies.length)];
-        new randEnemy.constructor();
+        const randEnemy = dummyEnemies[randInt(dummyEnemies.length)];
+        new randEnemy.constructor().spawn();
     }, 500)
 }
 
 function heatMap() {
     setInterval(() => {
-        for (const path of grid.path) {
+        for (const path of game.grid.path) {
             if (path.enemies.length > 0) {
                 const a = path.enemies.length;
                 path.DOMElement.style.backgroundColor = `rgb(${a*20}, ${a*10}, ${a*10})`
@@ -109,21 +126,3 @@ function download(content, fileName, contentType) {
     a.download = fileName;
     a.click();
 }
-
-// const container = [[1, 1], [0, 1], [2, 1]]
-// const array = [0, 1]
-// const result = arrayContainsArray(container, array)
-// console.log(result);
-//
-// function arrayContainsArray(container, subArray) {
-//     for (const array of container) {
-//         if (array.length !== subArray.length) continue;
-//         for (const index in array) {
-//             // console.log(array[index], subArray[index]);
-//             if (array[index] !== subArray[index]) break;
-//             console.log(index, array.length-1)
-//             if (index === array.length-1) return true;
-//         }
-//     }
-//     return false;
-// }

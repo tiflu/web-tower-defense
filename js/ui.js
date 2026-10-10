@@ -33,13 +33,13 @@ function insertTowerPurchase(tile, tower) {
     textContainer.append(description);
     upgradeContainer.append(textContainer);
 
-    if (player.canAfford(tower.cost)) {
+    if (game.player.canAfford(tower.cost)) {
         const buyButton = document.createElement("button");
         buyButton.textContent = "Buy";
         buyButton.addEventListener("click", () => {
-            player.spend(tower.cost);
+            game.player.spend(tower.cost);
             const newTower = new tower.constructor(tile.x, tile.y);
-            grid.replaceGridItem(newTower);
+            game.grid.replaceGridItem(newTower);
         });
         upgradeContainer.append(buyButton);
     }
@@ -54,9 +54,9 @@ function clearUpgrades() {
 function updateInfo() {
     info.innerHTML = "";
     const health = document.createElement("p");
-    health.textContent = "Health: " + player.health;
+    health.textContent = "Health: " + game.player.health;
     const gold = document.createElement("p");
-    gold.textContent = "Gold: " + player.gold;
+    gold.textContent = "Gold: " + game.player.gold;
 
     info.append(health);
     info.append(gold);

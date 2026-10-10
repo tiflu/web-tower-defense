@@ -7,8 +7,6 @@ class Enemy {
         this.texture = texture;
         this.DOMElement = this.createDOMElement();
         this.pathIndex = 0;
-        document.getElementById("enemies").append(this.DOMElement);
-        this.moveHandler();
     }
 
     createDOMElement() {
@@ -17,10 +15,15 @@ class Enemy {
         const mainTexture = document.createElement("img");
         mainTexture.src = FILE_PATH + this.texture;
         element.classList.add("enemy");
-        element.style.height = 100 / grid.size + "%";
-        element.style.width = 100 / grid.size + "%";
+        element.style.height = 100 / game.grid.size + "%";
+        element.style.width = 100 / game.grid.size + "%";
         element.append(mainTexture);
         return element;
+    }
+
+    spawn() {
+        document.getElementById("enemies").append(this.DOMElement);
+        this.moveHandler();
     }
 
     moveHandler() {
@@ -28,7 +31,7 @@ class Enemy {
             this.move()
             if (this.reachedEnd()) {
                 this.die(false);
-                player.takeDamage(1);
+                game.player.takeDamage(1);
             } else if (this.health <= 0) {
                 this.die(true);
             } else {
@@ -38,13 +41,13 @@ class Enemy {
     }
 
     reachedEnd() {
-        return this.pathIndex >= grid.path.length - 1
+        return this.pathIndex >= game.grid.path.length - 1
     }
 
     move() {
-        const oldPath = grid.path[this.pathIndex];
+        const oldPath = game.grid.path[this.pathIndex];
         oldPath.enemies.splice(oldPath.enemies.indexOf(this), 1);
-        const newPath = grid.path[++this.pathIndex]
+        const newPath = game.grid.path[++this.pathIndex]
         newPath.enemies.push(this);
         const pathBounds = newPath.DOMElement.getBoundingClientRect();
         this.DOMElement.style.top = pathBounds.top + "px";
@@ -57,11 +60,11 @@ class Enemy {
     }
 
     die(killed) {
-        if (killed) player.earn(this.value);
+        if (killed) game.player.earn(this.value);
         // I feel like this could be implemented more performantly
         // Maybe add an alive field and have a global listener "clean" every once in a while?
         this.DOMElement.remove();
-        for (const path of grid.path) {
+        for (const path of game.grid.path) {
             for (const enemy of path.enemies) {
                 if (enemy === this) {
                     path.enemies.splice(path.enemies.indexOf(this), 1);
