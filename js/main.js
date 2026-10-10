@@ -1,9 +1,9 @@
 const grid = new Grid(20, document.getElementById("grid"));
 const player = new Player();
 
-window.addEventListener("keydown", () => {
-    player.earn(100);
-})
+// window.addEventListener("keydown", () => {
+//     player.earn(100);
+// })
 
 updateInfo();
 

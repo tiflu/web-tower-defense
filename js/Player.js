@@ -36,6 +36,7 @@ class Player {
     }
 
     gameOver() {
-        //todo
+        alert("You lose!!!!!");
+        window.location.reload();
     }
 }

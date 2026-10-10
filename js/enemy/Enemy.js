@@ -26,16 +26,19 @@ class Enemy {
     moveHandler() {
         setTimeout(() => {
             this.move()
-            if (this.isValid()) {
-                this.moveHandler();
+            if (this.reachedEnd()) {
+                this.die(false);
+                player.takeDamage(1);
+            } else if (this.health <= 0) {
+                this.die(true);
             } else {
-                this.die();
+                this.moveHandler();
             }
         }, 1000/this.speed)
     }
 
-    isValid() {
-        return this.health > 0 && this.pathIndex < grid.path.length - 1
+    reachedEnd() {
+        return this.pathIndex >= grid.path.length - 1
     }
 
     move() {
@@ -53,8 +56,8 @@ class Enemy {
         return this.health < 0;
     }
 
-    die() {
-        player.earn(this.value);
+    die(killed) {
+        if (killed) player.earn(this.value);
         // I feel like this could be implemented more performantly
         // Maybe add an alive field and have a global listener "clean" every once in a while?
         this.DOMElement.remove();
