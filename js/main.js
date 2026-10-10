@@ -21,9 +21,6 @@ setInterval(() => {
 }, 500)
 //
 //
-new Enemy("triangle.png", 50);
-
-heatMap();
 
 function heatMap() {
     setInterval(() => {
