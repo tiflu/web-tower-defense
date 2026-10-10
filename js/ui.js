@@ -21,7 +21,7 @@ function insertTowerPurchase(tile, tower) {
     const moneyContainer = document.createElement("section");
     moneyContainer.classList.add("money");
     const goldIcon = document.createElement("img");
-    goldIcon.src = "gold.png";
+    goldIcon.src = "./texture/gold.png";
     moneyContainer.append(goldIcon);
     const cost = document.createElement("span");
     cost.textContent = tower.cost;

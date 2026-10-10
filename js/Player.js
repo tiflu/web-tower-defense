@@ -1,7 +1,7 @@
 class Player {
     constructor() {
         this.health = 100;
-        this.gold = 0;
+        this.gold = 100;
     }
 
     takeDamage(amount) {

@@ -1,17 +1,16 @@
 class Tower extends GridItem {
     constructor(x, y, radius, damage, name, description, texture, cost) {
         super(x, y);
-        const FILE_PATH = "./texture/tower/"
         this.name = name;
         this.description = description;
-        this.texture = texture;
+        this.texture = "./texture/tower/" + texture;
         this.radius = radius;
         this.damage = damage;
         this.cost = cost;
         this.targetedEnemy = null;
         this.pathTargets = this.getPathsInRange();
         const textureImg = document.createElement("img");
-        textureImg.src = FILE_PATH + this.texture;
+        textureImg.src = this.texture;
         this.DOMElement.append(textureImg);
         this.start();
     }
