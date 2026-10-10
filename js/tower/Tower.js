@@ -62,16 +62,16 @@ class Tower extends GridItem {
 
         for (let i = this.x - this.radius; i <= this.x + this.radius; i++) {
             for (let j = this.y - this.radius; j <= this.y + this.radius; j++) {
-                if (grid.coordinatesInBounds(i, j)) {
-                    // grid.items[i][j].DOMElement.style.backgroundColor = "white";
-                    itemsInRange.push(grid.items[i][j]);
+                if (game.grid.coordinatesInBounds(i, j)) {
+                    // game.grid.items[i][j].DOMElement.style.backgroundColor = "white";
+                    itemsInRange.push(game.grid.items[i][j]);
                 }
             }
         }
 
         const sortedPaths = [];
 
-        for (const path of grid.path) {
+        for (const path of game.grid.path) {
             if (itemsInRange.includes(path)) {
                 sortedPaths.push(path);
             }
