@@ -33,6 +33,7 @@ class Player {
     earn(amount) {
         this.gold += amount;
         updateInfo();
+        resetTowerMenu();
     }
 
     gameOver() {

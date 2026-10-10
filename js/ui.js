@@ -47,6 +47,11 @@ function insertTowerPurchase(tile, tower) {
     upgrades.append(upgradeContainer);
 }
 
+function resetTowerMenu() {
+    const clickedTile = document.querySelector(".gridItem.clicked");
+    if (clickedTile) clickedTile.click();
+}
+
 function clearUpgrades() {
     upgrades.innerHTML = "";
 }
