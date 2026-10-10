@@ -40,6 +40,8 @@ function insertTowerPurchase(tile, tower) {
             game.player.spend(tower.cost);
             const newTower = new tower.constructor(tile.x, tile.y);
             game.grid.replaceGridItem(newTower);
+            // todo show tower upgrades
+            upgrades.innerHTML = "";
         });
         upgradeContainer.append(buyButton);
     }
