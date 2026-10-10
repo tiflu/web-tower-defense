@@ -32,6 +32,7 @@ body {
 
 .gridItem.empty {
     background-color: gray;
+    cursor: pointer;
 }
 
 .gridItem.path {
@@ -40,6 +41,10 @@ body {
 
 .gridItem:hover {
     opacity: 0.8;
+}
+
+.gridItem.clicked {
+    background-color: dodgerblue;
 }
 
 .enemy {

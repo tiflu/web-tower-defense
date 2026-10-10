@@ -33,19 +33,31 @@ function insertTowerPurchase(tile, tower) {
     textContainer.append(description);
     upgradeContainer.append(textContainer);
 
-    const buyButton = document.createElement("button");
-    buyButton.textContent = "Buy";
-    buyButton.addEventListener("click", () => {
-        // todo if not enough money return/warn
-        // todo subtract money
-        const newTower = new tower.constructor(tile.x, tile.y);
-        grid.replaceGridItem(newTower);
-    });
-    upgradeContainer.append(buyButton);
+    if (player.canAfford(tower.cost)) {
+        const buyButton = document.createElement("button");
+        buyButton.textContent = "Buy";
+        buyButton.addEventListener("click", () => {
+            player.spend(tower.cost);
+            const newTower = new tower.constructor(tile.x, tile.y);
+            grid.replaceGridItem(newTower);
+        });
+        upgradeContainer.append(buyButton);
+    }
 
     upgrades.append(upgradeContainer);
 }
 
 function clearUpgrades() {
     upgrades.innerHTML = "";
+}
+
+function updateInfo() {
+    info.innerHTML = "";
+    const health = document.createElement("p");
+    health.textContent = "Health: " + player.health;
+    const gold = document.createElement("p");
+    gold.textContent = "Gold: " + player.gold;
+
+    info.append(health);
+    info.append(gold);
 }
