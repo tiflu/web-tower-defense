@@ -40,7 +40,9 @@ class Empty extends GridItem {
         element.classList.add("empty");
 
         element.addEventListener("click", () => {
-            
+            // todo all towers
+            clearUpgrades();
+            insertTowerPurchase(this, new PeaShooter());
         });
 
         return element;

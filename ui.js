@@ -1,7 +1,7 @@
 const upgrades = document.getElementById("upgradeMenu");
 const info = document.getElementById("infoMenu");
 
-function insertTowerPurchase(tower) {
+function insertTowerPurchase(tile, tower) {
     const upgradeContainer = document.createElement("section");
     upgradeContainer.classList.add("upgrade");
     const titleContainer = document.createElement("div");
@@ -36,9 +36,16 @@ function insertTowerPurchase(tower) {
     const buyButton = document.createElement("button");
     buyButton.textContent = "Buy";
     buyButton.addEventListener("click", () => {
-
+        // todo if not enough money return/warn
+        // todo subtract money
+        const newTower = new tower.constructor(tile.x, tile.y);
+        grid.replaceGridItem(newTower);
     });
     upgradeContainer.append(buyButton);
 
     upgrades.append(upgradeContainer);
+}
+
+function clearUpgrades() {
+    upgrades.innerHTML = "";
 }

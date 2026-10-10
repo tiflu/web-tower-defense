@@ -43,7 +43,6 @@ class Enemy {
         const newPath = grid.path[++this.pathIndex]
         newPath.enemies.push(this);
         const pathBounds = newPath.DOMElement.getBoundingClientRect();
-        console.log(pathBounds)
         this.DOMElement.style.top = pathBounds.top + "px";
         this.DOMElement.style.left = pathBounds.left + "px";
     }

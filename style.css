@@ -19,6 +19,7 @@ body {
 
 #enemies {
     position: absolute;
+    pointer-events: none;
 }
 
 .gridParent {

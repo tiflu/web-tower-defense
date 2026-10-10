@@ -11,7 +11,7 @@ grid.updatePath(pathCoords);
 
 const tower = new PeaShooter(3, 2);
 grid.replaceGridItem(tower);
-insertTowerPurchase(tower);
+// insertTowerPurchase(tower);
 
 setInterval(() => {
     new Enemy("texture.png", 1, 1, Math.random()*5);
@@ -44,7 +44,6 @@ function makeElementIntoGrid(element, size=40) {
     const smallestSide = Math.min(height, width);
     for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
-            console.log(i, j)
             const object = document.createElement("div");
             const hue = randInt(360) + "";
             const saturation = randInt() + "%";
@@ -60,7 +59,6 @@ function makeElementIntoGrid(element, size=40) {
     }
 
     element.lastElementChild.style.cursor = "click";
-    console.log(element.lastElementChild);
 
     function randInt(max=100) {
         return Math.ceil(Math.random() * max);
