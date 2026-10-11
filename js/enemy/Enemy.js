@@ -1,6 +1,7 @@
 class Enemy {
     constructor(texture, health, defense, speed, value) {
         this.health = health;
+        this.maxHealth = health;
         this.defense = defense;
         this.value = value;
         this.speed = speed;
@@ -56,6 +57,9 @@ class Enemy {
 
     takeDamage(amount) {
         this.health -= amount;
+        const healthPercent = this.health / this.maxHealth;
+        const opacity = healthPercent * 0.75 + 0.25;
+        this.DOMElement.style.opacity = opacity + "";
         return this.health < 0;
     }
 
