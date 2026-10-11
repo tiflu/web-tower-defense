@@ -1,4 +1,4 @@
-class Empty extends GridItem {
+class Empty extends Tile {
     constructor(x, y) {
         super(x, y);
     }
@@ -8,7 +8,7 @@ class Empty extends GridItem {
         element.classList.add("empty");
 
         element.addEventListener("click", () => {
-            const lastClicked = document.querySelector(".gridItem.clicked");
+            const lastClicked = document.querySelector(".tile.clicked");
             if (lastClicked) {
                 lastClicked.classList.remove("clicked");
             }

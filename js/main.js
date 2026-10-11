@@ -46,7 +46,7 @@ function allEmptyToTowers() {
     for (const row of game.grid.items) {
         for (const cell of row) {
             if (cell instanceof Empty) {
-                game.grid.replaceGridItem(new PeaShooter(cell.x, cell.y));
+                game.grid.replaceTile(new PeaShooter(cell.x, cell.y));
             }
         }
     }

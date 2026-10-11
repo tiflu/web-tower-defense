@@ -40,7 +40,7 @@ function insertTowerPurchase(tile, tower) {
         buyButton.addEventListener("click", () => {
             game.player.spend(tower.cost);
             const newTower = new tower.constructor(tile.x, tile.y);
-            game.grid.replaceGridItem(newTower);
+            game.grid.replaceTile(newTower);
             // todo show tower upgrades
             upgrades.innerHTML = "";
         });
@@ -69,7 +69,7 @@ function insertContinueButton(buttonText="Continue") {
 }
 
 function resetTowerMenu() {
-    const clickedTile = document.querySelector(".gridItem.clicked");
+    const clickedTile = document.querySelector(".tile.clicked");
     if (clickedTile) clickedTile.click();
 }
 

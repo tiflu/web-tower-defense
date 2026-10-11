@@ -1,4 +1,4 @@
-class Path extends GridItem {
+class Path extends Tile {
     constructor(x, y) {
         super(x, y);
         this.enemies = [];

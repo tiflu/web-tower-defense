@@ -1,4 +1,4 @@
-class GridItem {
+class Tile {
 
     constructor(x, y) {
         this.x = x;
@@ -8,7 +8,7 @@ class GridItem {
 
     createDOMElement() {
         const element = document.createElement("div");
-        element.classList.add("gridItem");
+        element.classList.add("tile");
         return element;
     }
 

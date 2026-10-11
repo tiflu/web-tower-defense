@@ -1,4 +1,4 @@
-class Tower extends GridItem {
+class Tower extends Tile {
     constructor(x, y, radius, damage, name, description, texture, cost) {
         super(x, y);
         this.name = name;

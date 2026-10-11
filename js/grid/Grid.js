@@ -16,33 +16,33 @@ class Grid {
         for (let i = 0; i < size; i++) {
             const row = [];
             for (let j = 0; j < size; j++) {
-                const gridItem = new Empty(i, j, this);
+                const tile = new Empty(i, j, this);
 
-                row.push(gridItem);
-                this.DOMElement.append(gridItem.DOMElement);
+                row.push(tile);
+                this.DOMElement.append(tile.DOMElement);
             }
             array.push(row);
         }
         return array;
     }
 
-    replaceGridItem(item) {
+    replaceTile(item) {
         this.items[item.x][item.y] = item;
         this.DOMElement.children[item.x * this.size + item.y].replaceWith(
             item.DOMElement);
     }
 
-    replaceGridItems(items) {
+    replaceTiles(items) {
         for (const item of items) {
-            this.replaceGridItem(item);
+            this.replaceTile(item);
         }
     }
 
     updatePath(pathArray) {
         this.path = [];
 
-        // Array of GridItems
-        if (pathArray[0] instanceof GridItem) {
+        // Array of Tiles
+        if (pathArray[0] instanceof Tile) {
             this.path = pathArray
             // Array of coordinate pairs
         } else {
@@ -50,7 +50,7 @@ class Grid {
                 this.path.push(new Path(coords[0], coords[1]));
             }
         }
-        this.replaceGridItems(this.path);
+        this.replaceTiles(this.path);
     }
 
     createPathWithUI() {

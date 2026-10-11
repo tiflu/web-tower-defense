@@ -27,24 +27,24 @@ body {
     display: grid;
 }
 
-.gridItem {
+.tile {
     outline: 2px solid black;
 }
 
-.gridItem.empty {
+.tile.empty {
     background-color: gray;
     cursor: pointer;
 }
 
-.gridItem.path {
+.tile.path {
     background-color: rosybrown;
 }
 
-.gridItem:hover {
+.tile:hover {
     opacity: 0.8;
 }
 
-.gridItem.clicked {
+.tile.clicked {
     background-color: dodgerblue;
 }
 
@@ -60,11 +60,11 @@ body {
     image-rendering: pixelated;
 }
 
-.gridItem.tower {
+.tile.tower {
     background-color: crimson;
 }
 
-.gridItem.tower img {
+.tile.tower img {
     width: 100%;
     display: block;
 }
