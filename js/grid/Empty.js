@@ -16,7 +16,7 @@ class Empty extends GridItem {
             element.classList.add("clicked");
             // todo all towers
             clearUpgrades();
-            insertTowerPurchase(this, new PeaShooter());
+            insertTowerPurchases(this);
         });
 
         return element;

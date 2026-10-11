@@ -1,5 +1,6 @@
 const game = makeGame();
 const dummyEnemies = [new Triangle(), new Square(), new Pentagon(), new Hexagon()];
+const dummyTowers = [new PeaShooter()]
 game.setRounds(dummyRounds());
 game.start();
 
