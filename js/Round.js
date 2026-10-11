@@ -13,7 +13,7 @@ class Round {
         const enemySpawns = [];
         for (let i = 0; i < randInt(6)+1; i++) {
             const enemies = [];
-            for (let j = 0; j < randInt(10)+1; j++) {
+            for (let j = 0; j < randInt(5)+1; j++) {
                 const enemy = new dummyEnemies[randInt(dummyEnemies.length)].constructor();
                 enemies.push(enemy);
             }

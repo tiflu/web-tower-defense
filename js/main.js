@@ -13,6 +13,11 @@ window.addEventListener("keydown", (event) => {
         }
         case "g": {
             game.player.earn(100);
+            break;
+        }
+        case "w": {
+            allEmptyToTowers();
+            break;
         }
     }
 })
@@ -37,6 +42,16 @@ function makeGame() {
     const grid = new Grid(20, document.getElementById("grid"));
     const player = new Player();
     return new Game(grid, player);
+}
+
+function allEmptyToTowers() {
+    for (const row of game.grid.items) {
+        for (const cell of row) {
+            if (cell instanceof Empty) {
+                game.grid.replaceGridItem(new PeaShooter(cell.x, cell.y));
+            }
+        }
+    }
 }
 
 function dummyRounds() {
