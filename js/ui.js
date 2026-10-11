@@ -64,7 +64,10 @@ function updateInfo() {
     health.textContent = "Health: " + game.player.health;
     const gold = document.createElement("p");
     gold.textContent = "Gold: " + game.player.gold;
+    const round = document.createElement("p");
+    round.textContent = "Round: " + (game.currentRound+1) + "/" + game.rounds.length;
 
     info.append(health);
+    info.append(round);
     info.append(gold);
 }
