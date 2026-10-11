@@ -1,8 +1,10 @@
+alert("Welcome to the game! Press P to pause. Click on a tile to add a tower. Press OK to start.");
 const game = makeGame();
 const dummyEnemies = [new Triangle(), new Square(), new Pentagon(), new Hexagon()];
 const dummyTowers = [new PeaShooter()]
 game.setRounds(dummyRounds());
-game.start();
+insertContinueButton("Start");
+updateInfo();
 
 
 
@@ -23,11 +25,6 @@ window.addEventListener("keydown", (event) => {
     }
 })
 
-
-alert("Welcome to the game! Press P to pause. Click on a tile to add a tower. Press OK to start.")
-
-updateInfo();
-
 // const pathCoords = [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [3, 2], [3, 3], [3, 4], [4, 4]];
 const pathCoords = [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[5,1],[5,2],[5,3],[5,4],[5,5],[5,6],[5,7],[6,7],[7,7],[8,7],[9,7],[10,7],[11,7],[12,7],[13,7],[13,8],[13,9],[13,10],[13,11],[13,12],[13,13],[13,14],[14,14],[15,14],[16,14],[17,14],[18,14],[19,14],[19,15],[19,16],[19,17],[19,18],[19,19]]
 
@@ -37,7 +34,7 @@ game.grid.updatePath(pathCoords);
 
 // grid.createPathWithUI();
 
-randomEnemies();
+// randomEnemies();
 
 function makeGame() {
     const grid = new Grid(20, document.getElementById("grid"));
@@ -58,7 +55,7 @@ function allEmptyToTowers() {
 function dummyRounds() {
     const rounds = [];
     for (let i = 0; i < 10; i++) {
-        rounds.push(new Round());
+        rounds.push(new Round(i+1));
     }
     return rounds;
 }

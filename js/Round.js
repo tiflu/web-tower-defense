@@ -1,6 +1,6 @@
 class Round {
-    constructor(enemySpawns) {
-        this.enemySpawns = enemySpawns ? enemySpawns : this.createRandomEnemySpawns();
+    constructor(roundNum, enemySpawns) {
+        this.enemySpawns = enemySpawns ? enemySpawns : this.createRandomEnemySpawns(roundNum);
     }
 
     async start() {
@@ -9,11 +9,13 @@ class Round {
         }
     }
 
-    createRandomEnemySpawns() {
+    createRandomEnemySpawns(roundNum) {
         const enemySpawns = [];
-        for (let i = 0; i < randInt(6)+1; i++) {
+        const maxEnemySpawns = randInt(roundNum) + 1;
+        for (let i = 0; i < maxEnemySpawns; i++) {
             const enemies = [];
-            for (let j = 0; j < randInt(5)+1; j++) {
+            const maxEnemies = randInt(roundNum*3)+1;
+            for (let j = 0; j < maxEnemies; j++) {
                 const enemy = new dummyEnemies[randInt(dummyEnemies.length)].constructor();
                 enemies.push(enemy);
             }

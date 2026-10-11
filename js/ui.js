@@ -1,4 +1,5 @@
 const upgrades = document.getElementById("upgradeMenu");
+const main = document.getElementById("mainMenu");
 const info = document.getElementById("infoMenu");
 
 function insertTowerPurchase(tile, tower) {
@@ -55,6 +56,18 @@ function insertTowerPurchases(tile) {
     }
 }
 
+function insertContinueButton(buttonText="Continue") {
+    const continueButton = document.createElement("button");
+    continueButton.classList.add("continue");
+    continueButton.textContent = buttonText;
+    continueButton.addEventListener("click", () => {
+        game.startRound().then(() => insertContinueButton());
+        continueButton.remove();
+    });
+
+    main.append(continueButton);
+}
+
 function resetTowerMenu() {
     const clickedTile = document.querySelector(".gridItem.clicked");
     if (clickedTile) clickedTile.click();
@@ -71,7 +84,8 @@ function updateInfo() {
     const gold = document.createElement("p");
     gold.textContent = "Gold: " + game.player.gold;
     const round = document.createElement("p");
-    round.textContent = "Round: " + (game.currentRound+1) + "/" + game.rounds.length;
+    console.log(game.currentRound);
+    round.textContent = "Round: " + (game.currentRound) + "/" + game.rounds.length;
 
     info.append(health);
     info.append(round);

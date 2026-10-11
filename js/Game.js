@@ -9,14 +9,9 @@ class Game {
         this.rounds = rounds;
     }
 
-    async start() {
-        for (let i in this.rounds) {
-            i = Number.parseInt(i);
-            this.currentRound = i;
-            const round = this.rounds[i];
-            updateInfo();
-            await round.start();
-            await wait(10000);
-        }
+    async startRound() {
+        const round = this.rounds[this.currentRound++];
+        updateInfo();
+        await round.start();
     }
 }
