@@ -1,5 +1,5 @@
 class Tower extends Tile {
-    constructor(x, y, radius, damage, name, description, texture, cost) {
+    constructor(x, y, radius, damage, name, description, texture, cost, attackRate) {
         super(x, y);
         this.name = name;
         this.description = description;
@@ -8,6 +8,7 @@ class Tower extends Tile {
         this.damage = damage;
         this.cost = cost;
         this.targetedEnemy = null;
+        this.attackRate = attackRate;
         this.pathTargets = this.getPathsInRange();
         const textureImg = document.createElement("img");
         textureImg.src = this.texture;
@@ -28,7 +29,7 @@ class Tower extends Tile {
     start() {
         setInterval(() => {
             this.attackHandler()
-        }, 100)
+        }, this.attackRate)
 
     }
 
