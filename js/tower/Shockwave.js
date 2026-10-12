@@ -10,4 +10,9 @@ class Shockwave extends Tower {
             }
         }
     }
+
+    upgrade() {
+        super.upgrade();
+        this.attackRate /= 2;
+    }
 }

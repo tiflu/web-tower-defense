@@ -7,6 +7,7 @@ class Tower extends Tile {
         this.radius = radius;
         this.damage = damage;
         this.cost = cost;
+        this.level = 1;
         this.targetedEnemy = null;
         this.attackRate = attackRate;
         this.pathTargets = this.getPathsInRange();
@@ -19,18 +20,30 @@ class Tower extends Tile {
     createDOMElement() {
         const element = super.createDOMElement();
         element.classList.add("tower");
-        element.addEventListener("click", () => {
-
-        });
 
         return element;
     }
 
-    start() {
-        setInterval(() => {
-            this.attackHandler()
-        }, this.attackRate)
+    onClick(element) {
+        const lastClicked = document.querySelector(".tile.clicked");
+        if (lastClicked) {
+            lastClicked.classList.remove("clicked");
+        }
 
+        element.classList.add("clicked");
+        clearUpgrades();
+        insertTowerUpgrades(this);
+    }
+
+    start() {
+        setTimeout(() => {
+            this.attackHandler();
+            this.start();
+        }, this.attackRate)
+    }
+
+    upgrade() {
+        this.level++;
     }
 
     targetEnemy() {

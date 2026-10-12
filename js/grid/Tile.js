@@ -9,7 +9,13 @@ class Tile {
     createDOMElement() {
         const element = document.createElement("div");
         element.classList.add("tile");
+        element.addEventListener("click", () => {
+            this.onClick(element);
+        });
         return element;
     }
 
+    onClick() {
+
+    }
 }

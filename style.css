@@ -62,6 +62,7 @@ body {
 
 .tile.tower {
     background-color: crimson;
+    cursor: pointer;
 }
 
 .tile.tower img {

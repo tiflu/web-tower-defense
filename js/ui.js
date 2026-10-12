@@ -2,9 +2,8 @@ const upgrades = document.getElementById("upgradeMenu");
 const main = document.getElementById("mainMenu");
 const info = document.getElementById("infoMenu");
 
-function insertTowerPurchase(tile, tower) {
-    const upgradeContainer = document.createElement("section");
-    upgradeContainer.classList.add("upgrade");
+
+function createTowerTitle(tower) {
     const titleContainer = document.createElement("div");
     titleContainer.classList.add("title");
     const icon = document.createElement("img")
@@ -12,9 +11,17 @@ function insertTowerPurchase(tile, tower) {
     titleContainer.append(icon);
 
     const title = document.createElement("h3");
-    title.textContent = tower.name;
+    title.textContent = tower.name + " - L" + tower.level;
     titleContainer.append(title);
-    upgradeContainer.append(titleContainer);
+    return titleContainer;
+}
+
+// Takes a dummy tower
+function insertTowerPurchase(tile, tower) {
+    const upgradeContainer = document.createElement("section");
+    upgradeContainer.classList.add("upgrade");
+    upgradeContainer.append(createTowerTitle(tower));
+
 
     const textContainer = document.createElement("div");
     textContainer.classList.add("text");
@@ -41,8 +48,7 @@ function insertTowerPurchase(tile, tower) {
             game.player.spend(tower.cost);
             const newTower = new tower.constructor(tile.x, tile.y);
             game.grid.replaceTile(newTower);
-            // todo show tower upgrades
-            upgrades.innerHTML = "";
+            insertTowerUpgrades(newTower);
         });
         upgradeContainer.append(buyButton);
     }
@@ -54,6 +60,33 @@ function insertTowerPurchases(tile) {
     for (const tower of dummyTowers) {
         insertTowerPurchase(tile, tower);
     }
+}
+
+// Takes a real tower
+function insertTowerUpgrades(tower) {
+    upgrades.innerHTML = "";
+    const upgradeContainer = document.createElement("section");
+    upgradeContainer.classList.add("upgrade");
+    upgradeContainer.append(createTowerTitle(tower));
+
+    const description = document.createElement("span");
+    description.textContent = tower.description;
+    upgradeContainer.append(description);
+
+    const upgradeCost = 50 * tower.level
+
+    if (game.player.canAfford(upgradeCost)) {
+        const upgradeButton = document.createElement("button");
+        upgradeButton.textContent = "Upgrade: " + upgradeCost + " Gold";
+        upgradeButton.addEventListener("click", () => {
+            game.player.spend(upgradeCost);
+            tower.upgrade();
+            insertTowerUpgrades(tower);
+        });
+        upgradeContainer.append(upgradeButton);
+    }
+
+    upgrades.append(upgradeContainer);
 }
 
 function insertContinueButton(buttonText="Continue") {
