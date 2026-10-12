@@ -69,7 +69,7 @@ function randomEnemies() {
 
 function heatMap() {
     setInterval(() => {
-        for (const path of game.grid.path) {
+        for (const path of game.grid.getPathTiles()) {
             if (path.enemies.length > 0) {
                 const a = path.enemies.length;
                 path.DOMElement.style.backgroundColor = `rgb(${a*20}, ${a*10}, ${a*10})`

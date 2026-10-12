@@ -42,13 +42,13 @@ class Enemy {
     }
 
     reachedEnd() {
-        return this.pathIndex >= game.grid.path.length - 1
+        return this.pathIndex >= game.grid.getPathTiles().length - 1
     }
 
     move() {
-        const oldPath = game.grid.path[this.pathIndex];
+        const oldPath = game.grid.getPathTiles()[this.pathIndex];
         oldPath.enemies.splice(oldPath.enemies.indexOf(this), 1);
-        const newPath = game.grid.path[++this.pathIndex]
+        const newPath = game.grid.getPathTiles()[++this.pathIndex]
         newPath.enemies.push(this);
         const pathBounds = newPath.DOMElement.getBoundingClientRect();
         this.DOMElement.style.top = pathBounds.top + "px";
@@ -68,7 +68,7 @@ class Enemy {
         // I feel like this could be implemented more performantly
         // Maybe add an alive field and have a global listener "clean" every once in a while?
         this.DOMElement.remove();
-        for (const path of game.grid.path) {
+        for (const path of game.grid.getPathTiles()) {
             for (const enemy of path.enemies) {
                 if (enemy === this) {
                     path.enemies.splice(path.enemies.indexOf(this), 1);

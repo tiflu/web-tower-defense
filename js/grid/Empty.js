@@ -14,7 +14,6 @@ class Empty extends Tile {
             }
 
             element.classList.add("clicked");
-            // todo all towers
             clearUpgrades();
             insertTowerPurchases(this);
         });

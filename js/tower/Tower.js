@@ -71,7 +71,7 @@ class Tower extends Tile {
 
         const sortedPaths = [];
 
-        for (const path of game.grid.path) {
+        for (const path of game.grid.getPathTiles()) {
             if (itemsInRange.includes(path)) {
                 sortedPaths.push(path);
             }
