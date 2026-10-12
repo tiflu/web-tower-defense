@@ -1,7 +1,7 @@
 alert("Welcome to the game! Press P to pause. Click on a tile to add a tower. Press OK to start.");
 const game = makeGame();
 const dummyEnemies = [new Triangle(), new Square(), new Pentagon(), new Hexagon()];
-const dummyTowers = [new PeaShooter()]
+const dummyTowers = [new PeaShooter(), new Shockwave()]
 game.setRounds(dummyRounds());
 insertContinueButton("Start");
 updateInfo();
