@@ -1,12 +1,14 @@
 class Round {
-    constructor(roundNum, enemySpawns) {
+    constructor(roundNum, enemySpawns, goldGranted) {
         this.enemySpawns = enemySpawns ? enemySpawns : this.createRandomEnemySpawns(roundNum);
+        this.goldGranted = goldGranted ? goldGranted : randInt(50*roundNum) + 50
     }
 
     async start() {
         for (const enemySpawn of this.enemySpawns) {
             await enemySpawn.spawnAll();
         }
+        game.player.earn(this.goldGranted);
     }
 
     createRandomEnemySpawns(roundNum) {

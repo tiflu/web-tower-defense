@@ -3,6 +3,7 @@ class Game {
         this.grid = grid;
         this.player = player;
         this.currentRound = 0;
+        this.auto = false;
     }
 
     setRounds(rounds) {
