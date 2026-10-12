@@ -86,6 +86,17 @@ function insertTowerUpgrades(tower) {
         upgradeContainer.append(upgradeButton);
     }
 
+    const sellButton = document.createElement("button");
+    const sellCost = (tower.cost + (tower.level * (tower.level - 1))*25)/2;
+    sellButton.textContent = `Sell (${sellCost} Gold)`
+    sellButton.addEventListener("click", () => {
+        game.player.earn(sellCost);
+        tower.alive = false;
+        game.grid.replaceTile(new Empty(tower.x, tower.y));
+        upgrades.innerHTML = "";
+    })
+    upgradeContainer.append(sellButton);
+
     upgrades.append(upgradeContainer);
 }
 

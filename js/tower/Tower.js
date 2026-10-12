@@ -8,6 +8,7 @@ class Tower extends Tile {
         this.damage = damage;
         this.cost = cost;
         this.level = 1;
+        this.alive = true;
         this.targetedEnemy = null;
         this.attackRate = attackRate;
         this.pathTargets = this.getPathsInRange();
@@ -38,7 +39,7 @@ class Tower extends Tile {
     start() {
         setTimeout(() => {
             this.attackHandler();
-            this.start();
+            if (this.alive) this.start();
         }, this.attackRate)
     }
 
